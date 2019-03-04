@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TodoSimpleSecurityApplication {
+public class DdbjAccountApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TodoSimpleSecurityApplication.class, args);
+		SpringApplication.run(DdbjAccountApplication.class, args);
 	}
 
 }
