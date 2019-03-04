@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>jp.ac.nig.ddbj</groupId>
 	<artifactId>ddbj-account-webui</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<name>ddbj-account-webui</name>
 	<description>Integrated Accounting System for DDBJ and NIG supercomputer</description>
 
