@@ -35,14 +35,20 @@ git cloneしたら以下を実行する。
 
 新規ユーザー登録画面 : ログインは不要
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/register.png)
+
 
 ログイン画面
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/sign_in.png)
 
 ログイン後の画面
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/indexhtml.png)
 
 H2データベース管理画面(Admin権限要)
+
+![](notes/notes_201903/note_0305_001_SpringSecurity/h2_console.png)
 
 
 
@@ -67,6 +73,7 @@ semantic versioningでバージョンをつけてtagを振ってあるので、�
 
 - v0.4.0
     - JDBC Authentication + スパコンユーザー登録（データベースにデータを入れる）機能の最も単純なプログラム。基本的な動きの確認のみ。
+    - 動作はまだ見直す必要がある。(`jp.ac.nig.ddbj.account.config.SpringSecurityConfig`をまだいじる必要があるがとりあえず関係者に公開する。)
 
 - v0.3.0
     - JDBC Authenticationでログインする最も単純なプログラム。基本的な動きの確認のみ。
