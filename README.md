@@ -35,16 +35,20 @@ git cloneしたら以下を実行する。
 
 新規ユーザー登録画面 : ログインは不要
 
-![](notes/notes_201903/note_0305_001_SpringSecurity/sign_in.png)
+![](notes/notes_201903/note_0305_001_SpringSecurity/register.png)
 
 
 ログイン画面
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/sign_in.png)
 
 ログイン後の画面
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/indexhtml.png)
 
 H2データベース管理画面(Admin権限要)
+
+![](notes/notes_201903/note_0305_001_SpringSecurity/h2_console.png)
 
 
 
