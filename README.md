@@ -35,6 +35,8 @@ git cloneしたら以下を実行する。
 
 新規ユーザー登録画面 : ログインは不要
 
+![](notes/notes_201903/note_0305_001_SpringSecurity/sign_in.png)
+
 
 ログイン画面
 
