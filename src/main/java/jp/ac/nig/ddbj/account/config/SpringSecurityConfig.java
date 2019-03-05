@@ -21,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final int BCRYPT_STRENGTH = 4;
+    final int BCRYPT_STRENGTH = 16;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -36,26 +36,57 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.jdbcAuthentication().dataSource(jdbcTemplate.getDataSource())
                 .usersByUsernameQuery(
-                        "select username,password, enabled from users where username=?")
+                        "select accountName, password, enabled from accounts where accountName=?")
                 .authoritiesByUsernameQuery(
-                        "select username, authority from authorities where username=?")
+                        "select accountName, authority from authorities where accountName=?")
                 .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        // see: https://qiita.com/aikumi/items/256b7892effd5c92a39f
+
+        /*
+        http.authorizeRequests().antMatchers("/login").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/h2-console/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
+
+        http.formLogin().loginProcessingUrl("/login").loginPage("/login")
+                .failureUrl("/error").defaultSuccessUrl("/", false)
+                .usernameParameter("loginId").passwordParameter("password")
+                .and()
+                .logout()//.logoutRequestMatcher(new AntPathRequestMatcher("signout"))
+                .logoutSuccessUrl("/login")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true).permitAll();
+
+        http.sessionManagement().invalidSessionUrl("/login");
+        */
+
         http
                 .authorizeRequests()
-                .mvcMatchers("/*").authenticated()
+
+                .mvcMatchers("/register").permitAll()
+                .mvcMatchers("/conformation/*").permitAll()
+                .mvcMatchers("/h2-console/*").hasRole("ADMIN")
+
+                .mvcMatchers("/*")
+                .authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
+
                 .and()
                 .logout()
                 .permitAll();
 
-        http.authorizeRequests().mvcMatchers("/rest/*").authenticated().and().httpBasic();
+
+
+        //http.authorizeRequests().mvcMatchers("/rest/*").authenticated().and().httpBasic();
     }
 
 
@@ -68,49 +99,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-/*
-    //Another way to override the user/password (another alternative to the spring.security.* properties
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder())
-                .withUser("apress")
-                .password(passwordEncoder().encode("springboot2"))
-                .roles("ADMIN","USER");
-    }
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .requestMatchers(
-                        PathRequest
-                                .toStaticResources()
-                                .atCommonLocations()).permitAll()
-                .anyRequest().fullyAuthenticated()
-                .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .logout()
-                    .logoutRequestMatcher(
-                            new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login");
-    }
-
-*/
-
     // Skipping the authentication.
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/register/**"
+                "/css/**", "/images/**", "/js/**","webjars/**",
+                "/register/**", "/conformation/**"
         );
     }
 
