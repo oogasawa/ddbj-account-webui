@@ -67,22 +67,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-
-                .mvcMatchers("/register").permitAll()
-                .mvcMatchers("/conformation/*").permitAll()
-                .mvcMatchers("/h2-console/*").hasRole("ADMIN")
-
-                .mvcMatchers("/*")
-                .authenticated()
-
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/conformation/**").permitAll()
+                .antMatchers("/h2-console/**").hasRole("ADMIN")
+                .anyRequest().fullyAuthenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout()
-                .permitAll();
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
 
 
 
@@ -100,13 +94,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     // Skipping the authentication.
-
+/*
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(
-                "/css/**", "/images/**", "/js/**","webjars/**",
-                "/register/**", "/conformation/**"
-        );
+        web
+                .ignoring()
+                .antMatchers("/h2-console/**");
     }
+*/
 
 }
