@@ -73,6 +73,7 @@ semantic versioningでバージョンをつけてtagを振ってあるので、�
 
 - v0.4.0
     - JDBC Authentication + スパコンユーザー登録（データベースにデータを入れる）機能の最も単純なプログラム。基本的な動きの確認のみ。
+    - 動作はまだ見直す必要がある。(`jp.ac.nig.ddbj.account.config.SpringSecurityConfig`をまだいじる必要があるがとりあえず関係者に公開する。)
 
 - v0.3.0
     - JDBC Authenticationでログインする最も単純なプログラム。基本的な動きの確認のみ。
