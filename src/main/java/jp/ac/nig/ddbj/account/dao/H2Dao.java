@@ -26,9 +26,9 @@ public class H2Dao {
 
     @Autowired
     public H2Dao( JdbcTemplate jdbcTemplate ) {
-        jdbcTemplate.execute(createAccountsTableSql());
-        jdbcTemplate.execute(createAuthoritiesTableSql());
-        jdbcTemplate.execute(createAccountAttributesTableSql());
+        //jdbcTemplate.execute(createAccountsTableSql());
+        //jdbcTemplate.execute(createAuthoritiesTableSql());
+        //jdbcTemplate.execute(createAccountAttributesTableSql());
 
 
         // create an admin user.
@@ -37,13 +37,13 @@ public class H2Dao {
 
         // create an example user.
         jdbcTemplate.update("MERGE INTO accounts KEY(accountName) VALUES ('ddbj', ?, TRUE);", passwordEncoder.encode("testddbj"));
-        jdbcTemplate.execute("MERGE INTO authorities KEY(accountName) VALUES ('ddbj', 'ROLE_ADMIN') ");
+        jdbcTemplate.execute("MERGE INTO authorities KEY(accountName) VALUES ('ddbj', 'ROLE_USER') ");
 
     }
 
 
 
-
+/*
     public String createAccountsTableSql() {
         StringJoiner j = new StringJoiner(" ");
         j.add("create table if not exists");
@@ -99,6 +99,8 @@ public class H2Dao {
         //System.err.println(j.toString());
         return j.toString();
     }
+*/
+
 
 
 
@@ -109,6 +111,9 @@ public class H2Dao {
         j.add("VALUES");
         j.add("('" + model.get("accountName") + "', FALSE)");
         j.add(";");
+
+
+        log.debug(j.toString());
 
         return j.toString();
 
@@ -124,6 +129,9 @@ public class H2Dao {
         j.add("'" + model.get("accountName") + "',");
         j.add("'ROLE_USER'");
         j.add(");");
+
+        log.debug(j.toString());
+
 
         return j.toString();
     }
@@ -171,6 +179,11 @@ public class H2Dao {
         j.add("'" + model.get("respAccountName") + "',");
         j.add("'" + model.get("respGroupName") + "'");
         j.add(");");
+
+        log.debug(j.toString());
+
+
+        System.err.println(j.toString());
 
         return j.toString();
     }

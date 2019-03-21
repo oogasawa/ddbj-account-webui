@@ -51,7 +51,7 @@
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            {{> nigsc_common}}
+                            {{> register/nigsc_common}}
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse in">
                         <div class="panel-body">
-                            {{> nigsc_responsible_short_form}}
+                            {{> register/nigsc_responsible_short_form}}
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div id="collapseTwoOne" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        {{> nigsc_responsible}}
+                                        {{> register/nigsc_responsible}}
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div id="collapseFour" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        {{> nigsc_large_scale}}
+                        {{> register/nigsc_large_scale}}
                     </div>
                 </div>
             </div>
@@ -111,12 +111,14 @@
             </div>
 
 
+
             <input type="submit" class="btn btn-success btn-send" value="Submit" />
             <br />
 
 
         </div>
     </div>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />    
     </form>
 </div>
 

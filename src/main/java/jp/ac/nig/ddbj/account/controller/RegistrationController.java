@@ -1,6 +1,8 @@
 package jp.ac.nig.ddbj.account.controller;
 
 import jp.ac.nig.ddbj.account.dao.H2Dao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -17,8 +19,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
-public class RegistorationController {
+public class RegistrationController {
 
+
+    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
 
     @Autowired
     H2Dao h2Dao;
@@ -73,6 +77,8 @@ public class RegistorationController {
             @RequestParam("agdAccounts")     String agdAccounts
             )  {
 
+        log.debug("accessRegisterWithPostMethod  --- 1");
+
         Map<String, String> model = new HashMap<String, String>();
 
         //System.out.println("accountName");
@@ -111,8 +117,11 @@ public class RegistorationController {
         model.put("jgaAccounts", jgaAccounts);
         model.put("agdAccounts", agdAccounts);
 
+        log.debug("accessRegisterWithPostMethod  --- 2");
+
 
         // ToDo: validation processes are needed.
+
 
         jdbcTemplate.execute(h2Dao.insertAccounts(model));
         jdbcTemplate.execute(h2Dao.insertAuthorities(model));

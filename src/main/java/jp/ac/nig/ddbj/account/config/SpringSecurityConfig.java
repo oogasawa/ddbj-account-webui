@@ -70,7 +70,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .antMatchers("/register/**").permitAll()
                 .antMatchers("/conformation/**").permitAll()
-                .antMatchers("/h2-console/**").hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/error/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
@@ -94,13 +96,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     // Skipping the authentication.
-/*
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers("/h2-console/**");
     }
-*/
+
 
 }
